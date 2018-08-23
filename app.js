@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const boosroutes = require('./routes/booksroute');
-const apiroutes = require('./routes/apiroutes');
-
 var path = require('path');
 
 var port = process.env.PORT || 4200;
@@ -12,8 +9,8 @@ var port = process.env.PORT || 4200;
 var app = express();
 
 //using body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended:true}));
 
 //setting view
 app.set('view engine', 'ejs');
@@ -24,7 +21,6 @@ app.get('/',(req,res)=>{
 });
 
 app.use(boosroutes);
-app.use('/api',apiroutes);
 
 app.use('',(req,res)=>{
    res.status(404);

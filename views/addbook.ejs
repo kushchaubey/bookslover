@@ -7,23 +7,25 @@
                 <div class="panel-title">Add the Book</div>
             </div>  
             <div class="panel-body" >
-                
+                <form method="post" action="/books" enctype="multipart/form-data">
+                    
+               
                         <div id="div_id_number" class="form-group required">
                              <label for="id_number" class="control-label col-md-4  requiredField">Title</label>
                              <div class="controls col-md-12 ">
-                                 <input class="form-control" id="book_title" name="" placeholder="Book Title" style="margin-bottom: 10px" type="text" />
+                                 <input class="form-control" id="book_title" name="title" placeholder="Book Title" style="margin-bottom: 10px" type="text" />
                             </div> 
                         </div> 
                            <div id="div_id_location" class="form-group required">
                             <label for="id_location" class="control-label col-md-4  requiredField">Author</label>
                             <div class="controls col-md-12 ">
-                                <input class="input-md textinput textInput form-control" id="book_author" name="location" placeholder="Your Pincode and City" style="margin-bottom: 10px" type="text" />
+                                <input class="input-md textinput textInput form-control" id="book_author" name="author" placeholder="Your Pincode and City" style="margin-bottom: 10px" type="text" />
                             </div> 
                         </div>
                         <div id="div_id_number" class="form-group required">
                              <label for="id_number" class="control-label col-md-4  requiredField">Description</label>
                              <div class="controls col-md-12 ">
-                                  <textarea class="form-control" rows="5" id="book_desc"></textarea>
+                                  <textarea class="form-control" rows="5" id="book_desc" name="desc"></textarea>
                             </div> 
                         </div> 
                      
@@ -35,7 +37,7 @@
                                     <div class="input-group">
                                         <span class="input-group-btn">
                                             <span class="btn btn-default btn-file">
-                                                Browse… <input type="file" id="imgInp">
+                                                Browse… <input type="file" id="imgInp" name="bookcover">
                                             </span>
                                         </span>
                                         
@@ -47,14 +49,14 @@
                         <div class="form-group"> 
                            
                             <div class="controls col-md-12 ">
-                                <input type="submit" name="Signup" value="Add Book" class="btn btn-dark btn btn-info" id="submitbook" />
+                                <input type="submit"  class="btn btn-dark btn btn-info" id="submitbook" />
                                
                             </div>
                         </div> 
                             
                     </form>
 
-                </form>
+                
             </div>
         </div>
     </div> 
