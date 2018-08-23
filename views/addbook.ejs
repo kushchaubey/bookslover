@@ -1,0 +1,63 @@
+<% include header%>
+   <div class="container addbook">    
+            
+    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Add the Book</div>
+            </div>  
+            <div class="panel-body" >
+                
+                        <div id="div_id_number" class="form-group required">
+                             <label for="id_number" class="control-label col-md-4  requiredField">Title</label>
+                             <div class="controls col-md-12 ">
+                                 <input class="form-control" id="book_title" name="" placeholder="Book Title" style="margin-bottom: 10px" type="text" />
+                            </div> 
+                        </div> 
+                           <div id="div_id_location" class="form-group required">
+                            <label for="id_location" class="control-label col-md-4  requiredField">Author</label>
+                            <div class="controls col-md-12 ">
+                                <input class="input-md textinput textInput form-control" id="book_author" name="location" placeholder="Your Pincode and City" style="margin-bottom: 10px" type="text" />
+                            </div> 
+                        </div>
+                        <div id="div_id_number" class="form-group required">
+                             <label for="id_number" class="control-label col-md-4  requiredField">Description</label>
+                             <div class="controls col-md-12 ">
+                                  <textarea class="form-control" rows="5" id="book_desc"></textarea>
+                            </div> 
+                        </div> 
+                     
+                           <div id="div_id_location" class="form-group required">
+                            
+                            <div class="controls col-md-12 ">
+                                <div class="form-group">
+                                    <label>Upload Image</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-default btn-file">
+                                                Browse… <input type="file" id="imgInp">
+                                            </span>
+                                        </span>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="form-group"> 
+                           
+                            <div class="controls col-md-12 ">
+                                <input type="submit" name="Signup" value="Add Book" class="btn btn-dark btn btn-info" id="submitbook" />
+                               
+                            </div>
+                        </div> 
+                            
+                    </form>
+
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<% include footer%>

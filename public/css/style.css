@@ -1,0 +1,43 @@
+#cardPanel{
+    margin-top:70px;
+}
+.imgbox{
+    margin: 1%;
+    margin-top:20px;
+}
+.authorbox{
+    margin: 1%;
+}
+.authorbox button{
+   width:100%;
+   margin-bottom: 7px;
+}
+.contentimg img{
+    width: 100%;
+}
+.card{
+    margin-top: 50px;
+}
+
+.addbook{
+    
+    margin-top:80px;
+
+}
+
+#signupbox{
+    margin: 0 auto;
+}
+.panel-heading{
+    color:white;
+    background-color: #343a40!important;
+    padding: 10px;
+}
+
+.panel-body{
+    border-left: 1px solid #343a40;
+    border-right: 1px solid #343a40;
+    border-bottom: 1px solid #343a40;
+    padding-top: 20px;
+
+}
