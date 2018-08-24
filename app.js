@@ -1,24 +1,19 @@
 const express = require('express');
+const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const boosroutes = require('./routes/booksroute');
 var path = require('path');
 
 var port = process.env.PORT || 4200;
+mongoose.connect("mongodb://localhost:27017/bookslover",{ useNewUrlParser: true },function(){
+    console.log("db connetion successfull");
+});
+mongoose.set('useFindAndModify', false);
 
-//setup App
 var app = express();
 
-//using body parser
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended:true}));
-
-//setting view
 app.set('view engine', 'ejs');
-app.use('/static', express.static(path.join(__dirname, 'public')))
-
-app.get('/',(req,res)=>{
-    res.render("index");
-});
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 app.use(boosroutes);
 

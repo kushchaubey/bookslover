@@ -5,24 +5,26 @@
       </article>
       <article class="container">  
           <div class="row">
-             <div class="col-md-4">
+          <%if(books) {%>
+            <% books.forEach(function(book){%>
+            <div class="col-md-4">
                 <div class="card ">
-                    <div class="card-header bg-dark text-white">harry potter and the sorcerer's stone</div>
+                    <div class="card-header bg-dark text-white"><%=book.title%></div>
                       <div class="card-content">
                           <div class="row imgbox" >
                               <div class="col-md-6 contentimg">
-                                <img src="static/images/koala.jpg" alt="" class="img-responsive">
+                                <img src="<%=book.coverpath%>" alt="" class="img-responsive">
                               </div>
                               <div class="col-md-6">
-                                  <p>Albus Dumbledore, Minerva McGonagall, and Rubeus Hagrid, professors of Hogwarts School of Witchcraft and Wizardry</p>
+                                  <p><%= book.desc%></p>
                             </div>
                         </div>
                         <div class="row authorbox">
                               <div class="col-md-12 contentimg">
-                                 <h6>Author: J.k Rawling</h6>
+                                 <h6>Author: <%=book.author%></h6>
                               </div>
                               <div class="col-md-12">
-                                 <h6>Rating: 5/5</h6>
+                                 <h6>Rating: <%=book.rating %>/5</h6>
                             </div>
                             <div class="col-md-12">
                                  <button class="btn btn-dark">Read More</button>
@@ -31,6 +33,7 @@
                     </div>   
                 </div>
              </div>
+             <%})}%>
           </div>
       </article>
     </section>
