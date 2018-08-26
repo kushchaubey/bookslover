@@ -8,8 +8,7 @@ var port = process.env.PORT || 4200;
 mongoose.connect("mongodb://localhost:27017/bookslover",{ useNewUrlParser: true },function(){
     console.log("db connetion successfull");
 });
-mongoose.set('useFindAndModify', false);
-
+mongoose.Promise = global.Promise;
 var app = express();
 
 app.set('view engine', 'ejs');

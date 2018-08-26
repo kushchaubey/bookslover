@@ -8,27 +8,27 @@ var saveBook = function(book){
        desc:book.desc,
        coverpath:book.coverpath
     });
-    addbook.save(function(err){
-       if(err){
-           return err;
-       }
-       return "book has been saved";
+
+    return new Promise((resolve, reject) => {
+    addbook.save().then(function(book){
+         resolve(book);
+    }).catch(function(err){
+        reject(err);
     });
+  }
+);
+
+
 }
 
-function allbooks(){
-  
-    var callback = function() {
-        return  function (error, books) {
-            if(error) {
-               return "error fetching books";
-            }
-            
-           return  books;
-        }
-    };
-  BooksModel.find({},callback);
-    
-   
-}
+
+var allbooks =function(){
+    return new Promise((resolve, reject) => {
+        BooksModel.find({}).then(function(books){
+          resolve(books);
+        }).catch(function(err){
+         reject("kush ka error" + error);
+        });
+}); 
+}   
     module.exports = {saveBook,allbooks};

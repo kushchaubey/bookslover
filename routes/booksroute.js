@@ -16,16 +16,24 @@ var booksModel = require('../models/booksmodel');
  
   router.get('/',(req,res)=>{
     
-    booksModel.find({},function(err,books){
-      if(err){
-          console.log("err fetching data");
-      }  
-
-       res.render("index",{books:books});
-    });
-    
+    bookscontroller.allbooks().then(function(books){
+     var booksreverse = books.reverse();
+      if(books){
+            res.render("index",{books,booksreverse});
+      }else{
+        res.send("freak");
+      }
+    }).catch(function(err){
+      console.log("My error"+ err);
   });
 
+  // booksModel.find({}).then(function(books){
+  //   res.render("index",{books,books});
+  // }).catch(function(err){
+  //   console.log("kush ka error" + error);
+  // });
+
+  });
   router.get('/books',(req,res)=>{
     res.render("addbook");
   });
@@ -36,16 +44,21 @@ router.post('/books', function (req, res) {
         console.log(err);
         return
       }
-         var book = req.body;
-         book.coverpath =req.file.path;
-         bookscontroller.saveBook(book);
-         booksModel.find({},function(err,books){
-          if(err){
-              console.log("err fetching data");
-          }  
-    
-           res.render("index",{books:books});
-        });
+      var book = req.body;
+      book.coverpath =req.file.path;
+      bookscontroller.saveBook(book).then(function(book){
+
+                 if(book){
+                   console.log(book.title + " is saved");
+                   bookscontroller.allbooks().then(function(books){
+                    var booksreverse = books.reverse();
+                    res.render("index",{books,books})
+                      }).catch(function(err){
+                     console.log("My error"+ err);
+            });
+                 }
+      });
+         
          
       })
   })

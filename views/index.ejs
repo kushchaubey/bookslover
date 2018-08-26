@@ -16,7 +16,7 @@
                                 <img src="<%=book.coverpath%>" alt="" class="img-responsive">
                               </div>
                               <div class="col-md-6">
-                                  <p><%= book.desc%></p>
+                                  <p><%= book.desc.substring(0,90)%> ...</p>
                             </div>
                         </div>
                         <div class="row authorbox">
@@ -33,7 +33,10 @@
                     </div>   
                 </div>
              </div>
-             <%})}%>
+             <%})} else{%>
+                <h3>No books find <a href="/books">Add new book</a></h3>
+                <%}%>
+                
           </div>
       </article>
     </section>
