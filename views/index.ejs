@@ -1,45 +1,142 @@
 <% include header%>
     <section id="cardPanel">
-      <article class="container">
-           <h3 class="text-center">Books love by us</h3>
-      </article>
-      <article class="container">  
-          <div class="row">
-          <%if(books) {%>
-            <% books.forEach(function(book){%>
-            <div class="col-md-4">
-                <div class="card ">
-                    <div class="card-header bg-dark text-white"><%=book.title%></div>
-                      <div class="card-content">
-                          <div class="row imgbox" >
-                              <div class="col-md-6 contentimg">
-                                <img src="<%=book.coverpath%>" alt="" class="img-responsive">
-                              </div>
-                              <div class="col-md-6">
-                                  <p><%= book.desc.substring(0,90)%> ...</p>
+        <article class="container">
+            <h3 class="text-center">Books love by us</h3>
+        </article>
+        <article class="container">
+            <div class="row">
+                <%if(books) {%>
+                    <% books.forEach(function(book){%>
+                        <div class="col-md-4">
+                            <div class="card ">
+                                <div class="card-header bg-dark text-white">
+                                    <%=book.title%>
+                                </div>
+                                <div class="card-content">
+                                    <div class="row imgbox">
+                                        <div class="col-md-6 contentimg">
+                                            <img src="<%=book.coverpath%>" alt="" class="img-responsive">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>
+                                                <%= book.desc.substring(0,90)%> ...</p>
+                                        </div>
+                                    </div>
+                                    <div class="row authorbox">
+                                        <div class="col-md-12 contentimg">
+                                            <h6>Author:
+                                                <%=book.author%>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h6>Rating:
+                                                <%=book.rating %>/5</h6>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<%=book._id%>">Edit</button>
+                                            <form method="post" action="/delate">
+                                                <input type="hidden" id="book_id" name="bookid" value="<%=book._id%>">
+                                                <input type="hidden" id="coverpathid" name="coverpath" value="<%=book.coverpath%>">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row authorbox">
-                              <div class="col-md-12 contentimg">
-                                 <h6>Author: <%=book.author%></h6>
-                              </div>
-                              <div class="col-md-12">
-                                 <h6>Rating: <%=book.rating %>/5</h6>
-                            </div>
-                            <div class="col-md-12">
-                                 <button class="btn btn-dark">Read More</button>
-                            </div>
-                        </div>
-                    </div>   
-                </div>
-             </div>
-             <%})} else{%>
-                <h3>No books find <a href="/books">Add new book</a></h3>
-                <%}%>
-                
-          </div>
-      </article>
-    </section>
-<%include footer%>
+                        <!-- The Modal -->
+                        <div class="modal" id="<%=book._id%>">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
 
-      
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit
+                                            <%=book.title%>
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form method="post" action="/edit">
+
+
+                                            <div id="div_id_number" class="form-group required">
+                                                <label for="id_number" class="control-label col-md-4  requiredField">Title</label>
+                                                <div class="controls col-md-12 ">
+                                                    <input class="form-control" id="book_title" name="title" placeholder="Book Title" value="<%= book.title%>" style="margin-bottom: 10px"
+                                                        type="text" />
+                                                </div>
+                                            </div>
+                                            <div id="div_id_location" class="form-group required">
+                                                <label for="id_location" class="control-label col-md-4  requiredField">Author</label>
+                                                <div class="controls col-md-12 ">
+                                                    <input class="input-md textinput textInput form-control" id="book_author" name="author" value="<%= book.author%>" placeholder="Author name"
+                                                        style="margin-bottom: 10px" type="text" />
+                                                </div>
+                                            </div>
+                                            <div id="div_id_location" class="form-group required">
+                                                <label for="id_location" class="control-label col-md-4  requiredField">Rating</label>
+                                                <div class="controls col-md-12 ">
+                                                    <input type="number" class="input-md textinput textInput form-control" id="book_rating" name="rating" value="<%= book.rating%>"
+                                                        placeholder="Rate the book out of 5" style="margin-bottom: 10px" type="text"
+                                                    />
+                                                    <input type="hidden" id="bookid" name="bookid" value="<%= book._id%>" />
+
+                                                </div>
+                                            </div>
+                                            <div id="div_id_number" class="form-group required">
+                                                <label for="id_number" class="control-label col-md-4  requiredField">Description</label>
+                                                <div class="controls col-md-12 ">
+                                                    <textarea class="form-control" rows="5" id="book_desc" name="desc">
+                                                        <%= book.desc%>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <div class="controls col-md-12 ">
+                                                    <input type="submit" class="btn btn-dark btn btn-info" id="submitbook" />
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <%})} else{%>
+                            <h3>No books find
+                                <a href="/books">Add new book</a>
+                            </h3>
+                            <%}%>
+
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item">
+                                <a class="page-link" href="/">Previous</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/">next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <%include footer%>

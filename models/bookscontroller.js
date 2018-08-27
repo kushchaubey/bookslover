@@ -31,4 +31,23 @@ var allbooks =function(){
         });
 }); 
 }   
-    module.exports = {saveBook,allbooks};
+var deleteBook = function(bookid){
+    return new Promise((resolve,reject)=>{
+      BooksModel.findByIdAndRemove(bookid).then((books)=>{
+        resolve(books);
+      }).catch(function(err){
+        reject("kush ka error" + error);
+       });
+    });
+}
+
+var updateBook = function(book_id, updatebook){
+     return new Promise((resolve,reject)=>{
+        BooksModel.findByIdAndUpdate(book_id,{$set:updatebook}).then((book)=>{
+          resolve(book);
+        }).catch(function(err){
+          reject("kush ka error" + error);
+         });
+     });
+}
+    module.exports = {saveBook,allbooks,deleteBook,updateBook};
