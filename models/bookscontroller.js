@@ -50,6 +50,18 @@ var searchbooks =function(searchterm){
 });
   } 
 }  
+
+var pagination  = function(page){  
+   return new Promise((resolve,reject)=>{
+    BooksModel.find({}).countDocuments().then(function(count){
+      
+      BooksModel.find({}).skip((4*page)-page).limit(4).then(function(data){
+                resolve(data);
+          
+       });
+    });
+   });
+}
 var deleteBook = function(bookid){
     return new Promise((resolve,reject)=>{
       BooksModel.findByIdAndRemove(bookid).then((books)=>{
@@ -69,4 +81,4 @@ var updateBook = function(book_id, updatebook){
          });
      });
 }
-    module.exports = {saveBook,allbooks,deleteBook,updateBook,searchbooks};
+    module.exports = {saveBook,allbooks,deleteBook,updateBook,searchbooks,pagination};

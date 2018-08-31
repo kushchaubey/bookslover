@@ -37,7 +37,6 @@ router.get('/books', (req, res) => {
   res.render("addbook");
 });
 router.post('/allbooks', (req, res) => {
-  console.log(req.body.keyword);
   bookscontroller.searchbooks(req.body.keyword).then(function (books) {
     var booksreverse = books.reverse();
     if (books) {
@@ -52,7 +51,23 @@ router.post('/allbooks', (req, res) => {
     console.log("My error" + err);
   });
  });
-  
+ router.get('/allbooks/:page', (req, res) => {
+   var page = req.params.page;
+     bookscontroller.pagination(page).then((books)=>{
+      var booksreverse = books.reverse();
+      if (books) {
+        res.render("index.ejs", {
+          books:booksreverse,
+          flag:0 
+        });
+      } else {
+        res.send("freak");
+      }
+    }).catch(function (err) {
+      console.log("My error" + err);
+    });
+     });
+ 
 router.post('/addbooks', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
@@ -62,14 +77,11 @@ router.post('/addbooks', function (req, res) {
     var book = req.body;
     book.coverpath = req.file.path;
     bookscontroller.saveBook(book).then(function (book) {
-
-      if (book) {
+    if (book) {
         console.log(book.title + " is saved");
         res.redirect('/')
       }
     });
-
-
   })
 });
 
