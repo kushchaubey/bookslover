@@ -22,7 +22,8 @@ router.get('/', (req, res) => {
     var booksreverse = books.reverse();
     if (books) {
       res.render("index", {
-        books:booksreverse
+        books:booksreverse,
+        flag:0
       });
     } else {
       res.send("freak");
@@ -35,8 +36,24 @@ router.get('/', (req, res) => {
 router.get('/books', (req, res) => {
   res.render("addbook");
 });
-
-router.post('/books', function (req, res) {
+router.post('/allbooks', (req, res) => {
+  console.log(req.body.keyword);
+  bookscontroller.searchbooks(req.body.keyword).then(function (books) {
+    var booksreverse = books.reverse();
+    if (books) {
+      res.render("index", {
+        books:booksreverse,
+        flag:1
+      });
+    } else {
+      res.send("freak");
+    }
+  }).catch(function (err) {
+    console.log("My error" + err);
+  });
+ });
+  
+router.post('/addbooks', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       console.log(err);
@@ -48,14 +65,7 @@ router.post('/books', function (req, res) {
 
       if (book) {
         console.log(book.title + " is saved");
-        bookscontroller.allbooks().then(function (books) {
-          var booksreverse = books.reverse();
-          res.render("index", {
-            books:booksreverse
-          })
-        }).catch(function (err) {
-          console.log("My error" + err);
-        });
+        res.redirect('/')
       }
     });
 
@@ -72,14 +82,7 @@ router.post('/delate',function(req,res){
              console.log("something went wrong while deleting the file");
            }
            else{
-            bookscontroller.allbooks().then(function (books) {
-              var booksreverse = books.reverse();
-              res.render("index", {
-                books:booksreverse
-              })
-            }).catch(function (err) {
-              console.log("My error" + err);
-            });
+            res.redirect('/')
            }
          })
     }).catch(function (err) {
@@ -91,14 +94,7 @@ router.post('/edit',(req,res)=>{
   let book_id = req.body.bookid;
   delete req.body['bookid'];
    bookscontroller.updateBook(book_id,req.body).then((book)=>{
-    bookscontroller.allbooks().then(function (books) {
-      var booksreverse = books.reverse();
-      res.render("index", {
-        books:booksreverse
-      })
-    }).catch(function (err) {
-      console.log("My error" + err);
-    });
+    res.redirect('/')
    }).catch((err)=>{
     console.log("My error" + err);
    });

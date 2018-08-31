@@ -1,10 +1,19 @@
 <% include header%>
+  <%if(!flag==1){%>
     <section id="cardPanel">
         <article class="container">
             <h3 class="text-center">Books love by us</h3>
         </article>
+       
         <article class="container">
             <div class="row">
+                <section id="searchSection">
+                 <!-- Search form -->
+             <input class="form-control" type="text"  id="searchBox" placeholder="Search Books" aria-label="Search">
+        </section>
+    <%}%>
+            </div>
+            <div class="row" id="allbooks">
                 <%if(books) {%>
                     <% books.forEach(function(book){%>
                         <div class="col-md-4">
@@ -105,7 +114,7 @@
 
                                         </form>
                                     </div>
-
+                            
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -123,6 +132,7 @@
                             <%}%>
 
             </div>
+             <%if(!flag==1){%>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -137,6 +147,7 @@
                     </div>
                 </div>
             </div>
+        <%}%>
         </article>
     </section>
     <%include footer%>

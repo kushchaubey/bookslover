@@ -30,7 +30,26 @@ var allbooks =function(){
          reject("kush ka error" + error);
         });
 }); 
-}   
+} 
+var searchbooks =function(searchterm){
+  if(searchterm==''){
+    return new Promise((resolve, reject) => {
+      BooksModel.find({}).then(function(books){
+        resolve(books);
+      }).catch(function(err){
+       reject("kush ka error" + error);
+      });
+}); 
+  }else{
+  return new Promise((resolve, reject) => {
+      BooksModel.find({title:new RegExp(searchterm, "i")}).then(function(books){
+        resolve(books);
+      }).catch(function(err){
+       reject("kush ka error" + error);
+      });
+});
+  } 
+}  
 var deleteBook = function(bookid){
     return new Promise((resolve,reject)=>{
       BooksModel.findByIdAndRemove(bookid).then((books)=>{
@@ -50,4 +69,4 @@ var updateBook = function(book_id, updatebook){
          });
      });
 }
-    module.exports = {saveBook,allbooks,deleteBook,updateBook};
+    module.exports = {saveBook,allbooks,deleteBook,updateBook,searchbooks};
